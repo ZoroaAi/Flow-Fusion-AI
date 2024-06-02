@@ -1,0 +1,123 @@
+@use './util/_mixins.scss' as m;
+@use './util/themes.scss' as t;
+@use './util/_responsive.scss' as r;
+
+.features {
+    width: 100%;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    .features_wrapper {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .feature_heading {
+            @include m.sectionHeadings(feature);
+            .feature_subHeading {
+                color: lighten(t.$text-light, 20%);
+                text-align: center;
+            }
+        }
+
+        .service_selector {
+            list-style-type: none;
+            display: flex;
+            flex-direction: row;
+            justify-self: center;
+            color: lighten($color: t.$text-light, $amount: 40%);
+            font-weight: 700;
+            font-size: 1.1rem;
+
+            li {
+                padding: 0em 1em 1em 1em;
+                margin-bottom: 10px;
+
+                button {
+                    all: unset;
+                    cursor: pointer;
+                    border-bottom: 3px solid lighten($color: t.$text-light, $amount: 40%);
+                    text-align: center;
+                    padding: 0.5em;
+
+                    &:hover {
+                        border-bottom: 3px solid t.$primary-light;
+                    }
+
+                    &.active {
+                        color: t.$primary-light;
+                        border-bottom: 3px solid t.$primary-light;
+                    }
+                }
+
+                &:hover {
+                    color: t.$primary-light;
+                }
+            }
+
+            @media (max-width: map-get(r.$breakpoints, md)) {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .features_card {
+            display: flex;
+            flex-direction: row;
+            color: t.$text-light;
+
+            .features_txt {
+                max-width: 50ch;
+                padding-left: 5em;
+
+                h2 {
+                    margin-bottom: 1ch;
+                }
+
+                p {
+                    line-height: 2.5ch;
+                    margin-bottom: 1ch;
+                }
+
+                ul {
+                    li {
+                        margin: 0.5ch;
+                        list-style-type: square;
+                        list-style-position: inside;
+                    }
+                }
+            }
+
+            img {
+                max-width: 300px;
+                max-height: 300px;
+                height: auto;
+                object-fit: contain;
+            }
+
+            @media (max-width: map-get(r.$breakpoints, md)) {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+
+                .features_txt {
+                    padding-left: 0;
+                }
+            }
+
+            @media (max-width: map-get(r.$breakpoints, sm)) {
+                img {
+                    max-width: 80%;
+                }
+            }
+        }
+    }
+
+    @media (max-width: map-get(r.$breakpoints, sm)) {
+        display: none;
+    }
+}

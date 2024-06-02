@@ -1,0 +1,190 @@
+@use './util/themes.scss' as t;
+@use './util/_mixins.scss' as m;
+// Debug
+// * {
+//     border: 1px solid red;
+// }
+
+*,
+*:before,
+*:after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.nav-bar {
+	z-index: 10;
+	width: 100%;
+	background-color: t.$primary-light;
+	height: 60px;
+	font: 700 0.875rem/0.875rem "Open Sans", sans-serif;
+	
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-sizing: border-box;
+	
+	padding: 20px 40px 20px 120px;
+
+	&.sticky{
+		position: fixed;
+		top: 0;
+		width: 100%;
+	}
+  
+	.nav_container {
+		max-width: 100vw;
+		width: 100%;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+  
+	.site-logo {
+		height: auto;
+		width: 3.5em;
+	}
+  
+	.main-nav {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		list-style: none;
+  
+		li {
+			padding: 0 15px;
+			display: flex;
+			align-items: center;
+			height: 100%;
+
+			a {
+				text-decoration: none;
+				color: t.$background-light;
+				font-size: 0.875rem;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+
+				&:hover {
+					color: darken(t.$background-light, 10%);
+				}
+			}
+
+			#cta {
+				all: unset;
+				cursor: pointer;
+				@include m.secondaryButton;
+				text-decoration: none;
+				&:hover{
+					color: t.$primary-light;
+					background-color: t.$background-light;
+				}
+			}
+		}
+	}
+  
+	#drop-down-cbox {
+	  display: none;
+	}
+  
+	label[for="drop-down-cbox"] {
+		display: none; // Ensure the label is not displayed on larger screens
+		position: absolute;
+		top: 50%;
+		right: 20px;
+		transform: translateY(-50%);
+		cursor: pointer;
+
+		padding: 20px;
+		height: 30px;
+	
+		span {
+		  position: absolute;
+		  display: block;
+		  background-color: t.$background-light;
+		  width: 34px;
+		  height: 4px;
+		  border-radius: 2px;
+		  transition: all 300ms ease-in-out;
+		}
+	
+		span:nth-child(1) {
+		  top: calc(50% - 10px); // Adjust so they don't overlap
+		}
+		span:nth-child(2) {
+		  top: 50%;
+		}
+		span:nth-child(3) {
+		  top: calc(50% + 10px); // Adjust so they don't overlap
+		}
+	  }
+	
+	  // When checkbox is checked
+	  #drop-down-cbox:checked + label span {
+		background-color: t.$background-light;
+	
+		&:nth-child(1) {
+		  top: 50%;
+		  transform: translate(-50%, -50%) rotate(45deg);
+		}
+		&:nth-child(2) {
+		  opacity: 0; // Hide the middle bar by changing opacity
+		}
+		&:nth-child(3) {
+		  top: 50%;
+		  transform: translate(-50%, -50%) rotate(-45deg);
+		}
+	}
+}
+
+/* Tablet and Mobile View */
+@media (max-width: 768px) {
+	.nav-bar {
+	  padding: 0 20px 0 30px;
+	}
+	.site-logo {
+	  width: 40px;
+	  margin: 0 auto;
+	}
+  
+	/* Ensure the label is displayed on smaller screens */
+	#drop-down-cbox + label {
+	  display: block;
+	}
+  
+	.main-nav {
+	  font-size: 0.9rem;
+	  font-weight: 700;
+	  max-height: 0px;
+	  height: calc(100vh - 60px);
+	  overflow: hidden;
+	  position: absolute;
+	  top: 60px;
+	  line-height: auto;
+	  left: 0;
+	  width: 100%;
+	  flex-direction: column;
+	  background-color: t.$primary-light;
+	  transition: all 500ms ease-in-out;
+	}
+  
+	#drop-down-cbox:checked ~ .main-nav {
+	  max-height: calc(100vh - 60px);
+	  transition: all 500ms ease-in-out;
+	}
+}
+  
+
+
+/* Mobile Nav Button Bars */
+#drop-down-cbox + label span {
+	position: absolute;
+	background-color: t.$background-light;
+	width: 34px;
+	height: 4px;
+	border-radius: 2px;
+	left: 50%;
+	transform: translate(-50%, -50%); /* centering trick */
+	transition: all 300ms ease-in-out;
+}

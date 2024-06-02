@@ -1,0 +1,15 @@
+@use './util/themes.scss' as theme;
+
+#root{
+    min-width: 390px;
+}
+
+html{
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background-color: theme.$background-light;
+	color: theme.$primary-light;
+}

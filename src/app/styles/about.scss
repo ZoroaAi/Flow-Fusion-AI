@@ -1,0 +1,46 @@
+@use './util/_responsive.scss' as r;
+@use './util/themes.scss' as t;
+@use './util/_mixins.scss' as m;
+
+#about{
+    height: 100vh;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 120px;
+    padding: 60px 8em;
+
+    #model{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .aboutImg{
+        width: 800px;
+        @media (max-width: map-get(r.$breakpoints,lg)) {
+            width: 500px;
+        }
+        @media (max-width: map-get(r.$breakpoints,sm)) {
+            width: 300px;
+        }
+    }
+    
+    .about_txt{
+        min-width: 250px;
+        max-width: 550px;
+        @include m.sectionHeadings('about');
+        p{
+            font-size: 1.15rem;;
+            color: t.$text-light;
+            line-height: 2.5ch;
+        }
+    }
+
+    @media (max-width: map-get(r.$breakpoints,lg)) {
+        flex-direction: column;
+        padding: 60px 4em;
+    }
+}

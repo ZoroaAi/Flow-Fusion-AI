@@ -1,0 +1,56 @@
+@use './util/themes.scss' as t;
+@use './util/_mixins.scss' as m;
+
+#services{
+    width: 100%;
+    min-height: auto;
+    position: relative;
+    padding: 60px;
+    background-color: t.$darker-bg-light;
+    
+    .services_heading{
+        @include m.sectionHeadings('service');
+    }
+    
+    .cards {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        align-items: flex-start;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+    }
+}
+
+
+.service_card {
+    border-radius: 15px;
+    width: 300px;
+    min-height: 350px;
+    padding: 20px;
+    color: t.$text-light;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    
+    img{
+        height: auto;
+        width: 100%;
+    }
+
+    h3.service_heading {
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+    }
+    
+    p.service_desc {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: t.$text-light;
+    }
+}

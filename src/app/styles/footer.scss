@@ -1,0 +1,21 @@
+@use './util/themes.scss' as t;
+
+#footer{
+    width: 100%;
+    padding: 0 60px 0 60px;
+    color: t.$text-light;
+
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 1em;
+    .footer-text{
+        display: flex;
+        justify-content: space-between;
+    }
+    span{
+        width: 100%;
+        margin-bottom: 1em;
+        border: 1px solid t.$primary-light;
+    }
+}

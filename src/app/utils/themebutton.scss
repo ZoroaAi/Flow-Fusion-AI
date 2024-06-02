@@ -1,0 +1,38 @@
+@use '../styles/_responsive.scss' as r;
+.switch{
+    width: 100%;
+    height: 15px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 33px;
+    padding: 10px;
+
+    background-color: #54c6cca0;
+
+    cursor: pointer;
+
+    input{
+        display: none;
+    }
+
+    .handle {
+        width: 18px;
+        height: 18px;
+        background-color: #fafa00fa;
+        border-radius: 40px;
+    }
+
+    @media (max-width: map-get(r.$breakpoints, md)) {
+        width: 80px;
+        height: 25px;
+        .handle{
+            width: 25px;
+            height: 25px;
+        }
+    }
+}
+.switch[data-darkmode="false"] {
+    justify-content: flex-end;
+}

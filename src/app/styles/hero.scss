@@ -1,0 +1,79 @@
+@use './util/_responsive.scss' as r;
+@use './util/themes.scss' as t;
+@use './util/_mixins.scss' as m;
+
+.hero_section{
+    // padding-top: 60px;
+    height: calc(100vh - 60px);
+    background-color: t.$primary-light;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    position: relative;
+
+    .hero_content{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        margin-bottom: 60px;
+
+        @media (max-width: map-get(r.$breakpoints,lg)){
+            flex-direction: column;
+            .hero_txt{
+                margin: 50px 0;
+                text-align: center;
+            }
+        }
+    }
+
+    .hero_txt{
+        min-width: 40ch;
+        max-width: 60ch;
+        text-align: left;
+        color: t.$background-light;
+        padding-right: 20px;
+
+        h1{
+        	margin-bottom: 1rem;
+            color: #fff;
+            font-size: 2.8rem;
+            line-height: 3rem;
+        }
+        p{
+            padding-bottom: 40px;
+        }
+
+        #hero_cta{
+            all: unset;
+            cursor: pointer;
+            @include m.heroButton;
+            text-decoration: none;
+        }
+    }
+
+    img{
+        padding-left: 20px;
+    }
+
+    .hero_wave {
+        width: 100%;
+        height: 100px;
+        bottom: 0;
+        position: absolute;
+    }
+}
+
+
+
+
+
+@keyframes bob {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}

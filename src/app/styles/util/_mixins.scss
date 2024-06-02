@@ -1,0 +1,66 @@
+@use './themes.scss' as t;
+
+@mixin buttonStyle{
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+@mixin primaryButton{
+    border: none;
+    background-color: t.$primary-light;
+
+    color: t.$background-light;
+
+    @include buttonStyle();
+
+    &:hover{
+        border: 1px solid t.$primary-light;
+        background-color: t.$background-light;
+        color: t.$primary-light;
+    }
+}
+
+@mixin secondaryButton{
+    border: 2px solid white;
+    background-color: t.$primary-light;
+    
+    padding: 8px;
+    color: t.$background-light;
+    @include buttonStyle();
+}
+
+@mixin heroButton{
+    color: t.$primary-light;
+    border: 2px solid white;
+    background-color: t.$background-light;
+
+    font-size: 1rem;
+
+    padding: 1rem 2rem;
+    @include buttonStyle();
+
+    &:hover{
+        color: t.$background-light;
+        background-color: t.$primary-light;
+    }
+}
+
+@mixin sectionHeadings($section){
+    text-align: center;
+    margin-bottom: 2em;
+    .#{$section}_title {
+        color: rgb(104, 104, 226);
+        font-size: 0.9em;
+        font-weight: 600;
+        margin-bottom: 0.25em;
+        text-transform: uppercase;
+    }
+    h2{
+        text-transform: uppercase;
+        letter-spacing: 0.2rem;
+        margin-bottom: 1ch;
+        opacity: 97%;
+        color: t.$text-light;
+    }
+}
