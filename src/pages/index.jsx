@@ -1,10 +1,9 @@
 import Head from 'next/head';
 import About from '../app/components/About';
-import Contact from '../app/components/Contact';
+import SignUp from '../app/components/Contact';
 import Features from '../app/components/Features';
 import Hero from '../app/components/Hero';
 import Services from '../app/components/Services';
-import Layout from '../app/components/layout';
 
 import '../app/styles/global.scss';
 
@@ -20,7 +19,7 @@ function Home(){
             <About/>
             <Services/>
             <Features/>
-            <Contact/>
+            <SignUp/>
         </>
     )
 }

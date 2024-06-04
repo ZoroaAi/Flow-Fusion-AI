@@ -16,7 +16,7 @@ const About = () => {
                 </p>
             </div>
             <div id="model">
-                <Image width={100} height={100} src="/images/about.jpg" alt="" className='aboutImg' layout='responsive'/>
+                <Image width={100} height={100} src="/images/about.jpg" alt="" className='aboutImg'/>
             </div>
         </section>
     )

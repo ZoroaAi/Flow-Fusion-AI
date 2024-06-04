@@ -3,6 +3,10 @@
 .blogs-route-wrapper {
   padding: 20px;
   min-width: 375px;
+
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background-color: t.$background-light;
+	color: t.$primary-light;
 }
 
 .search-bar-container {
@@ -123,42 +127,57 @@
   background-color: t.$background-light;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: 100vh;
+}
 
-  .breadcrumb {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 10px 0;
-    margin-bottom: 20px;
-    list-style: none;
-    background-color: transparent;
-    border-radius: 4px;
+.breadcrumb-container {
+  display: grid;
+  grid-template-columns: 1fr auto; // Use grid layout to position items
+  align-items: center;
+  padding: 10px 0;
+  margin-bottom: 20px;
+}
 
-    .breadcrumb-item {
-      font-size: 14px;
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  background-color: transparent;
+  border-radius: 4px;
+
+  .breadcrumb-item {
+    font-size: 14px;
+    color: t.$primary-light;
+    margin-right: 5px;
+
+    a {
+      text-decoration: none;
       color: t.$primary-light;
-      margin-right: 5px;
 
-      a {
-        text-decoration: none;
-        color: t.$primary-light;
-
-        &:hover {
-          text-decoration: underline;
-        }
+      &:hover {
+        text-decoration: underline;
       }
+    }
 
-      &.active {
-        color: #000;
-        font-weight: bold;
-      }
+    &.active {
+      color: #000;
+      font-weight: bold;
     }
   }
 }
 
+.breadcrumb-date {
+  font-size: 14px;
+  color: t.$primary-light;
+  font-weight: bold;
+}
+
+
+
+
 h1 {
   font-size: 36px;
   color: t.$primary-light;
+  margin-bottom: 1em;
 }
 
 .blog-description {
@@ -178,7 +197,7 @@ h1 {
   float: right;
   width: 150px; // Smaller square image
   height: 150px;
-  margin-right: 20px;
+  margin-left: 20px; // Change margin-right to margin-left for better float
   margin-bottom: 20px;
   border-radius: 8px;
   object-fit: cover;
@@ -188,4 +207,49 @@ h1 {
   font-size: 16px;
   line-height: 1.6;
   color: #333;
+  overflow: hidden; // Ensure no overflow
+
+  // Styling for HTML tags inside blog content
+  h2, h3, h4 {
+    color: t.$primary-light;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+
+  p {
+    margin-bottom: 1em;
+  }
+
+  ul, ol {
+    margin-bottom: 1em;
+    padding-left: 20px;
+
+    li {
+      margin-bottom: 0.5em;
+      list-style: none;
+    }
+  }
+
+  a {
+    color: t.$primary-light;
+    text-decoration: underline;
+
+    &:hover {
+      color: darken(t.$primary-light, 10%);
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  blockquote {
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    border-left: 5px solid t.$primary-light;
+    background-color: lighten(t.$background-light, 10%);
+  }
 }

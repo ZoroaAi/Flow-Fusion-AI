@@ -1,82 +1,42 @@
 import axios from 'axios';
-import { useState } from 'react';
-import { Card, Form, TextInput, TextArea, BudgetDropDown, Button } from './sub_components/subContact.jsx';
+import { motion } from "framer-motion";
 
 import '../styles/contact.scss';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-const Contact = () => {
-    const [formData, setFormData] = useState({
-        email: { label: 'Email', value: '', focus: false }
-    });
-
-    const [isLoading, setIsLoading] = useState(false);
-    const [isDone, setIsDone] = useState(false);
-
-    const handleFocus = (e) => {
-        const name = e.target.name;
-        setFormData({
-            ...formData,
-            [name]: { ...formData[name], focus: true }
-        });
+const SignUp = () => {
+    const router = useRouter();
+    const handleClick = () => {
+        router.push('/sign-up');
     };
 
-    const handleBlur = (e) => {
-        const name = e.target.name;
-        setFormData({
-            ...formData,
-            [name]: { ...formData[name], focus: false }
-        });
-    };
-
-    const handleChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        setFormData({
-            ...formData,
-            [name]: { ...formData[name], value }
-        });
-    };
-
-    const dataToSend = {
-        email: formData.email.value
-    }
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsLoading(true);
-        await sendDataToAPI(dataToSend);
-        setIsLoading(false);
-        setIsDone(true);
-
-        setTimeout(() => {
-            setIsDone(false);
-        }, 2000);
-    }
-
-    const { name, email, message, company, budget } = formData;
-
-  return (
+    return (
     <div id='contact'>
-        <Card>
-            <div className='contact_heading'>
-                <p className='contact_title'>Contact Us</p>
-                <h2>GET ACCESS TO <span>FREE</span> <br/>AUTOMATION RESOURCES!</h2>
-            </div>
-            <Form onSubmit={handleSubmit} >
-                <TextInput
-                    {...email}
-                    name="email"
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    autocomplete="email"
-                />
-                <input type="checkbox" name="opt-in" id="newsletter" checked />
-                <Button isLoading={isLoading} isDone={isDone} >Send</Button>
-            </Form>
-        </Card>
+        <div className='contact_heading'>
+            <p className='contact_title'>Create An Account</p>
+            <h2>SIGN UP AND GET ACCESS TO <span>FREE</span> <br/>AUTOMATION RESOURCES!</h2>
+        </div>
+        <motion.button
+            type="submit"
+            className="sign-up-button"
+            whileHover={{
+                scale: 1.05,
+            }}
+            whileTap={{
+                scale: 0.95
+            }}
+            transition={{
+                type: 'spring',
+                stiffness: 500,
+                damping: 30
+            }}
+            onClick={handleClick}
+        >
+            SIGN UP
+        </motion.button>
     </div>
-  );
+    );
 }
 
-export default Contact;
+export default SignUp;

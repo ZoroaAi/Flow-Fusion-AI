@@ -8,6 +8,7 @@
 
 @mixin primaryButton{
     border: none;
+    cursor: pointer;
     background-color: t.$primary-light;
 
     color: t.$background-light;
@@ -44,6 +45,25 @@
         color: t.$background-light;
         background-color: t.$primary-light;
     }
+}
+
+@mixin heroSecondaryButton{
+    color: t.$background-light;
+    border: 2px solid white;
+
+    font-size: 1rem;
+
+    padding: 1rem 2rem;
+    @include buttonStyle();
+
+    transition: transform 0.2s;
+
+    &:hover{
+        color: t.$background-light;
+        border-color: t.$complimentary-light;
+        background-color: t.$complimentary-light;
+        transform: scale(1.1);
+;    }
 }
 
 @mixin sectionHeadings($section){

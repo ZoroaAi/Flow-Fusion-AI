@@ -48,11 +48,32 @@
             padding-bottom: 40px;
         }
 
-        #hero_cta{
-            all: unset;
-            cursor: pointer;
-            @include m.heroButton;
-            text-decoration: none;
+        .cta-buttons{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1em;
+
+            #hero_cta{
+                all: unset;
+                cursor: pointer;
+                @include m.heroButton;
+                text-decoration: none;
+            }
+            #heroSecondaryButton{
+                all: unset;
+                cursor: pointer;
+                @include m.heroSecondaryButton;
+                text-decoration: none;
+            }
+
+            @media (max-width: map-get(r.$breakpoints,md)){
+                flex-direction: column;
+                .hero_txt{
+                    margin: 50px 0;
+                    text-align: center;
+                }
+            }
         }
     }
 

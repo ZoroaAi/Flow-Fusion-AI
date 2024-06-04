@@ -10,6 +10,8 @@ export async function getStaticPaths(){
         filterByFormula: '{Status} = "Approved"',
     }).all();
 
+    // console.log('Records from Airtable:', records);
+
     const blogs = records.map(record => ({
         id: record.id,
         slug: record.fields.Slug.replace(/ /g, '-')
@@ -18,15 +20,23 @@ export async function getStaticPaths(){
     const paths = blogs.map(blog => ({
         params: { slug: blog.slug.replace(/ /g, '-') },
     }))
+    // console.log('Mapped blogs:', blogs);
     return { paths, fallback: false };
 }
 
-export async function getStaticProps({params}){
+export async function getStaticProps({ params }) {
+    // Correct the slug by removing leading and trailing spaces and dots
+    const sanitizedSlug = params.slug.replace(/^-+|-+$/g, '').trim();
+
     const base = new Airtable({ apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY }).base(process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID);
     const records = await base('Blogs').select({
-        filterByFormula: `{Slug} = "${params.slug.replace(/-/g, ' ')}"`,
+        filterByFormula: `{Slug} = "${sanitizedSlug}"`,
     }).all();
-    
+
+    if (records.length === 0) {
+        return { notFound: true };
+    }
+
     const blog = records.map(record => ({
         id: record.id,
         title: record.fields.Title || '',
@@ -38,13 +48,18 @@ export async function getStaticProps({params}){
         canonicalTag: record.fields['Canonical Tag'] || '',
         slug: record.fields.Slug || '',
         date: record.fields.Date || '',
+        keywords: record.fields.Keywords || ''
     }))[0];
 
-    return { props: { blog: blog || {} }};
+    return {
+        props: {
+            blog: blog || {}
+        }
+    };
 }
 
 const BlogPost = ({ blog }) => {
-    if (!blog) {
+    if (!blog.title) {
         return <div>Blog post not found</div>;
     }
 
@@ -58,18 +73,19 @@ const BlogPost = ({ blog }) => {
                 <link rel='canonical' href={`https://flowfusionai.com/blogs/${blog.slug}`} />
             </Head>
             <div className='blog-post'>
-                {blog.hImage && <img src={blog.hImage} alt={blog.title} className='header-image'/>}
-                <h1>{blog.title}</h1>
-                <nav aria-label='breadcrumb'>
+                {blog.hImage && <img src={blog.hImage} alt={blog.title} className='header-image' />}
+                <nav className='breadcrumb-container'>
                     <ol className='breadcrumb'>
                         <li className='breadcrumb-item'><Link href="/">Home/</Link></li>
                         <li className='breadcrumb-item'><Link href="/blogs">Blogs/</Link></li>
-                        <li className='breadcrumb-item active'><Link href="/blogs">{blog.title}</Link></li>
+                        <li className='breadcrumb-item active' aria-current="page">{blog.title}</li>
                     </ol>
+                    <p className='breadcrumb-date'>Published: {blog.date}</p>
                 </nav>
-                {blog.cImage && <img src={blog.cImage} alt={blog.title} className='content-image'/>}
-                <p>{blog.description}</p>
-                <div dangerouslySetInnerHTML={{ __html: blog.content }} />
+                <h1>{blog.title}</h1>
+                {blog.cImage && <img src={blog.cImage} alt={blog.title} className='content-image' />}
+                <p className='blog-description'>{blog.description}</p>
+                <div className='blog-content' dangerouslySetInnerHTML={{ __html: blog.content }} />
             </div>
         </div>
     );

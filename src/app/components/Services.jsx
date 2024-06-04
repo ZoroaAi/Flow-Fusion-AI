@@ -29,7 +29,7 @@ const ServiceCard = ({title, img, desc}) => {
                 scale: 1.05,
             }}
         >
-            <Image src={img} width={300} height={200} alt={title} layout='responsive'/>
+            <Image src={img} width={300} height={200} alt={title}/>
             <h3 className='service_heading'>{title}</h3>
             <span className='breakLine'></span>
             <p className='service_desc'>{desc}</p>
