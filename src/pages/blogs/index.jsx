@@ -71,27 +71,27 @@ const Blogs = ({ blogs, currentPage, totalPages, search: initialSearch }) => {
         <button type='submit' className='search-button' >Search</button>
       </form>
       <div className='blog-list-container'>
-      <h1>All Blogs</h1>
-      <ul className='blog-list'>
-        {blogs.length > 0 ? (
-          blogs.map((blog) => (
-            <li key={blog.id} className='blog-item'>
-              <Link href={`/blogs/${blog.Slug.replace(/ /g, '-')}`}>
-                {blog.Image && <img src={blog.Image} alt={blog.Title} className='blog-image' />}
-                <h2>{blog.Title}</h2>
-                <p>{blog.Description}</p>
-              </Link>
-            </li>
-          ))
-        ) : (
-          <li>No blog posts found</li>
-        )}
-        </ul>
-        <div className="pagination">
-          {prevPage > 0 && <Link href={`?page=${prevPage}&search=${search}`}><button className='pagination-button'>Previous</button></Link>}
-          <p>Page: {currentPage} of {totalPages}</p>
-          {nextPage <= totalPages && <Link href={`?page=${nextPage}&search=${search}`}><button className='pagination-button'>Next</button></Link>}
-        </div>
+        <h1>All Blogs</h1>
+        <ul className='blog-list'>
+          {blogs.length > 0 ? (
+            blogs.map((blog) => (
+              <li key={blog.id} className='blog-item'>
+                <Link href={`/blogs/${blog.Slug.replace(/ /g, '-')}`}>
+                  {blog.Image && <img src={blog.Image} alt={blog.Title} className='blog-image' />}
+                  <h2>{blog.Title}</h2>
+                  <p>{blog.Description}</p>
+                </Link>
+              </li>
+            ))
+          ) : (
+            <li>No blog posts found</li>
+          )}
+          </ul>
+          <div className="pagination">
+            {prevPage > 0 && <Link href={`?page=${prevPage}&search=${search}`}><button className='pagination-button'>Previous</button></Link>}
+            <p>Page: {currentPage} of {totalPages}</p>
+            {nextPage <= totalPages && <Link href={`?page=${nextPage}&search=${search}`}><button className='pagination-button'>Next</button></Link>}
+          </div>
       </div>
     </div>
     

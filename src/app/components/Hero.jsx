@@ -1,9 +1,8 @@
 import { getCalApi } from "@calcom/embed-react";
 import { useEffect } from "react";
+import Link from "next/link";
 
 import '../styles/hero.scss';
-import Image from "next/image";
-import Link from "next/link";
 
 const CalButton = () => {
     useEffect(() => {
@@ -64,7 +63,7 @@ const Hero = () => {
             <Link href="/login" id="heroSecondaryButton"> Get FREE Resources !</Link>
           </div>
         </div>
-        <Image width={25} height={25} src="/images/description-1.png" alt="Hero"/>
+        <img src="/images/description-1.png" alt="Hero"/>
       </div>
       <Waves />
     </div>

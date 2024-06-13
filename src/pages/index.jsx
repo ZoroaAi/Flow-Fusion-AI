@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import About from '../app/components/About';
-import SignUp from '../app/components/Contact';
+import SignUp from '../app/components/SignUp';
 import Features from '../app/components/Features';
 import Hero from '../app/components/Hero';
 import Services from '../app/components/Services';

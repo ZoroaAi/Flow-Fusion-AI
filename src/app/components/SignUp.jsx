@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 const SignUp = () => {
     const router = useRouter();
     const handleClick = () => {
-        router.push('/sign-up');
+        router.push('/login');
     };
 
     return (

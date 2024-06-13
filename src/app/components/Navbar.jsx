@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import { getCalApi } from "@calcom/embed-react";
 import { useEffect } from "react";
+import { useAuth } from '@/hooks/useAuth';
 
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
@@ -42,8 +43,11 @@ const NavButton = () => {
 };
 
 const Navbar = () => {
+  const { user, logout } = useAuth();
   const checkBoxRef = useRef(null);
   const navRef = useRef(null);
+
+  // console.log("Nav user: ", user);
 
   const handleLinkClick = () => {
     if(checkBoxRef.current){
@@ -84,15 +88,21 @@ const Navbar = () => {
 
         <ul className="main-nav small-caps">
           <li><a href="#hero" onClick={handleLinkClick}>Home</a></li>
-          <li><a href='#about' onClick={handleLinkClick}>About Us</a></li>
           <li><Link href="/blogs">Blogs</Link></li>
           <li><Link href="/resources" onClick={handleLinkClick}>Resources</Link></li>
+          {user ? (
+            <li>
+              <a className='nav-logout' onClick={logout}>Logout</a>
+            </li>
+          ): (
+            <li>
+              <Link href="/login">Login</Link>
+            </li>
+          )}
           <li>
             <NavButton />
           </li>
         </ul>
-
-          
       </div>
     </nav>
   )
